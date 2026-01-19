@@ -1,0 +1,192 @@
+<div class="pantalla-resultados">
+    <!-- Fondo con overlay -->
+    <div class="fondo-contenedor">
+        <div class="fondo-imagen"></div>
+        <div class="fondo-overlay"></div>
+    </div>
+
+    <div class="contenedor-principal">
+        <!-- Encabezado -->
+        <div class="encabezado">
+            <div class="logo-container">
+                <div class="logo-icon"></div>
+                <div class="texto-logo">
+                    <h1 class="app-title">Raíz y Futuro</h1>
+                    <p class="app-subtitle">Decidir bien hoy, vivir mejor mañana</p>
+                </div>
+            </div>
+            <h2>Resultados de tu Evaluación</h2>
+            <p class="instruccion">Aquí verás el análisis completo de tu emprendimiento</p>
+        </div>
+
+        <!-- Información del emprendimiento -->
+        <div class="info-emprendimiento" *ngIf="emprendimiento">
+            <div class="emprendimiento-card">
+                <div class="emprendimiento-icon">{{ emprendimiento.icono }}</div>
+                <div class="emprendimiento-info">
+                    <h3>{{ emprendimiento.titulo }}</h3>
+                    <p>{{ emprendimiento.descripcion }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resultados principales -->
+        <div class="resultados-principales" *ngIf="resultados">
+            <div class="categoria-principal" [style.background-color]="resultados.colorCategoria">
+                <div class="categoria-icon">{{ resultados.iconoCategoria }}</div>
+                <div class="categoria-texto">
+                    <h3>{{ resultados.categoria === 'conveniente' ? 'CONVENIENTE' :
+                           resultados.categoria === 'riesgosa' ? 'RIESGOSA' : 'NO RECOMENDABLE' }}</h3>
+                    <p>{{ resultados.mensajePrincipal }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard de métricas -->
+        <div class="dashboard-metricas" *ngIf="resultados">
+            <h3>📊 Números de tu Emprendimiento</h3>
+            <div class="metricas-grid">
+                <div class="metrica-card">
+                    <div class="metrica-icon">💰</div>
+                    <div class="metrica-info">
+                        <h4>Dinero que Ganas o Pierdes</h4>
+                        <div class="metrica-valor" [class]="resultados.van >= 0 ? 'positivo' : 'negativo'">
+                            {{ formatearMoneda(resultados.van) }}
+                        </div>
+                        <p class="metrica-desc">
+                            {{ resultados.van >= 0 ? '¡Ganas dinero!' : 'Pierdes dinero - necesitas cambiar algo' }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="metrica-card">
+                    <div class="metrica-icon">📈</div>
+                    <div class="metrica-info">
+                        <h4>Cuánto Crece tu Dinero</h4>
+                        <div class="metrica-valor" [class]="resultados.tir >= 15 ? 'positivo' : 'neutro'">
+                            {{ formatearPorcentaje(resultados.tir) }}
+                        </div>
+                        <p class="metrica-desc">
+                            Porcentaje que crece tu dinero cada año
+                        </p>
+                    </div>
+                </div>
+
+                <div class="metrica-card">
+                    <div class="metrica-icon">⏱️</div>
+                    <div class="metrica-info">
+                        <h4>Cuánto Tiempo para Recuperar</h4>
+                        <div class="metrica-valor" [class]="resultados.van >= 0 ? (resultados.periodoRecuperacion <= 12 ? 'positivo' : 'riesgoso') : 'negativo'">
+                            {{ resultados.van >= 0 ? ('Recuperas en ' + resultados.periodoRecuperacion + ' meses') : 'Nunca recuperas' }}
+                        </div>
+                        <p class="metrica-desc">
+                            {{ resultados.van >= 0 ? 'Tiempo para recuperar tu inversión inicial' : 'Con estos números nunca recuperas el dinero invertido' }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="metrica-card">
+                    <div class="metrica-icon">⚠️</div>
+                    <div class="metrica-info">
+                        <h4>Nivel de Riesgo</h4>
+                        <div class="metrica-valor" [class]="resultados.riesgo">
+                            {{ resultados.riesgo === 'bajo' ? 'POCO RIESGO' : resultados.riesgo === 'medio' ? 'RIESGO NORMAL' : 'MUCHO RIESGO' }}
+                        </div>
+                        <p class="metrica-desc">
+                            Según tu tipo de emprendimiento
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de resumen -->
+        <div class="resumen-tabla" *ngIf="respuestas">
+            <h3>📋 Lo que Nos Dijiste</h3>
+            <table class="tabla-datos">
+                <thead>
+                    <tr>
+                        <th>Qué</th>
+                        <th>Cuánto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dinero para empezar</td>
+                        <td>{{ formatearMoneda(respuestas.dineroInicial) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Meses trabajando</td>
+                        <td>{{ respuestas.mesesTrabajo }} meses</td>
+                    </tr>
+                    <tr>
+                        <td>Gastos cada mes</td>
+                        <td>{{ formatearMoneda(respuestas.gastosMensuales) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Dinero que esperas ganar</td>
+                        <td>{{ formatearMoneda(respuestas.ingresosMensuales) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Meses sin ganar dinero</td>
+                        <td>{{ respuestas.mesesSinIngreso }} meses</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Recomendaciones -->
+        <div class="seccion-recomendaciones" *ngIf="resultados">
+            <h3>💡 Consejos para Mejorar</h3>
+            <div class="lista-recomendaciones">
+                <div class="recomendacion-item" *ngFor="let recomendacion of resultados.recomendaciones">
+                    <span class="recomendacion-icon">•</span>
+                    <span class="recomendacion-texto">{{ recomendacion }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensajes motivacionales -->
+        <div class="mensajes-motivacionales">
+            <div class="mensaje-card">
+                <div class="mensaje-icon">🌱</div>
+                <div class="mensaje-texto">
+                    <h4>Recuerda</h4>
+                    <p>"Como sembramos en la selva, así crece nuestro trabajo. Cuida hoy para cosechar mañana."</p>
+                </div>
+            </div>
+            <div class="mensaje-card">
+                <div class="mensaje-icon">🙏</div>
+                <div class="mensaje-texto">
+                    <h4>Principio Importante</h4>
+                    <p>"El dinero ganado con honestidad y trabajo duro bendice a la familia y fortalece la comunidad."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="contenedor-botones">
+            <button class="boton boton-volver" (click)="volver()">
+                <span class="icono">←</span>
+                Cambiar Mis Respuestas
+            </button>
+            <button class="boton boton-nuevo" (click)="empezarDeNuevo()">
+                <span class="icono">🔄</span>
+                Hacer Nuevo Análisis
+            </button>
+        </div>
+
+        <!-- Botón de IA separado -->
+        <div class="contenedor-boton-ia">
+            <button class="boton boton-ia" (click)="irAI()">
+                <span class="icono">🤖</span>
+                Diagnosticar con IA
+            </button>
+        </div>
+
+        <!-- Pie de página -->
+        <div class="pie-pagina">
+            <p>Una herramienta para pensar bien antes de invertir</p>
+        </div>
+    </div>
+</div>

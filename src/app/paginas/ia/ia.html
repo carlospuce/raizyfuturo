@@ -1,0 +1,73 @@
+<div class="pantalla-ia">
+    <!-- Fondo con overlay -->
+    <div class="fondo-contenedor">
+        <div class="fondo-imagen"></div>
+        <div class="fondo-overlay"></div>
+    </div>
+
+    <div class="contenedor-principal">
+        <!-- Encabezado -->
+        <div class="encabezado">
+            <div class="logo-container">
+                <div class="logo-icon"></div>
+                <div class="texto-logo">
+                    <h1 class="app-title">Raíz y Futuro</h1>
+                    <p class="app-subtitle">Análisis con Inteligencia Artificial</p>
+                </div>
+            </div>
+            <h2>Chat con IA Financiera</h2>
+            <p class="instruccion">La IA está analizando tu emprendimiento</p>
+        </div>
+
+        <!-- Área de chat -->
+        <div class="chat-container">
+            <div class="mensajes" #mensajesContainer>
+                <div class="mensaje" *ngFor="let mensaje of mensajes" [class]="mensaje.tipo">
+                    <div class="mensaje-avatar">
+                        <span class="avatar-icon">{{ mensaje.tipo === 'usuario' ? '👤' : '🤖' }}</span>
+                    </div>
+                    <div class="mensaje-contenido">
+                        <div class="mensaje-header">
+                            <span class="mensaje-autor">{{ mensaje.tipo === 'usuario' ? 'Tú' : 'IA Financiera' }}</span>
+                            <span class="mensaje-tiempo">{{ mensaje.timestamp | date:'short' }}</span>
+                        </div>
+                        <div class="mensaje-texto">{{ mensaje.contenido }}</div>
+                    </div>
+                </div>
+
+                <!-- Mensaje de carga -->
+                <div class="mensaje ia cargando" *ngIf="cargando">
+                    <div class="mensaje-avatar">
+                        <span class="avatar-icon">🤖</span>
+                    </div>
+                    <div class="mensaje-contenido">
+                        <div class="mensaje-header">
+                            <span class="mensaje-autor">IA Financiera</span>
+                        </div>
+                        <div class="mensaje-texto">
+                            <div class="typing-indicator">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            Analizando tu información...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón de volver -->
+        <div class="contenedor-botones">
+            <button class="boton boton-volver" (click)="volver()">
+                <span class="icono">←</span>
+                Volver a Resultados
+            </button>
+        </div>
+
+        <!-- Pie de página -->
+        <div class="pie-pagina">
+            <p>Análisis inteligente para decisiones financieras</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,447 @@
+/* ===== VARIABLES Y RESET ===== */
+:root {
+  --color-primario: #2E7D32;
+  --color-primario-claro: #4CAF50;
+  --color-secundario: #1B5E20;
+  --color-fondo: rgba(244, 241, 236, 0.95);
+  --color-texto: #2C3E50;
+  --color-texto-claro: #5D6D7E;
+  --sombra-suave: 0 8px 32px rgba(31, 38, 135, 0.1);
+  --sombra-fuerte: 0 20px 60px rgba(0, 0, 0, 0.15);
+  --radio-borde: 20px;
+  --transicion: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+}
+
+/* ===== FONDO DE PANTALLA ===== */
+.pantalla-ia {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.fondo-contenedor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.fondo-imagen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/yasuni3.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  filter: brightness(0.7) sepia(0.3) hue-rotate(-10deg);
+}
+
+.fondo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(47, 93, 80, 0.2) 0%, rgba(244, 241, 236, 0.4) 50%, rgba(47, 93, 80, 0.1) 100%);
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.contenedor-principal {
+  width: 100%;
+  max-width: 520px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== ENCABEZADO ===== */
+.encabezado {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.logo-icon {
+  font-size: 40px;
+  animation: flotar 3s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.texto-logo h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primario);
+  margin: 0;
+}
+
+.texto-logo p {
+  font-size: 14px;
+  color: var(--color-texto-claro);
+  margin: 5px 0 0 0;
+}
+
+.encabezado h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-texto);
+  margin: 20px 0 10px 0;
+}
+
+.instruccion {
+  color: var(--color-texto-claro);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* ===== CHAT CONTAINER ===== */
+.chat-container {
+  background: rgba(248, 250, 252, 0.8);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 35px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.mensajes {
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===== MENSAJES ===== */
+.mensaje {
+  display: flex;
+  gap: 12px;
+  animation: aparecer 0.5s ease-out;
+}
+
+.mensaje-avatar {
+  flex-shrink: 0;
+}
+
+.avatar-icon {
+  font-size: 24px;
+  display: block;
+}
+
+.mensaje-contenido {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: var(--sombra-suave);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.mensaje.usuario .mensaje-contenido {
+  background: rgba(248, 250, 252, 0.9);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.mensaje.ia .mensaje-contenido {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(46, 125, 50, 0.3);
+}
+
+.mensaje-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.mensaje-autor {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-texto);
+}
+
+.mensaje-tiempo {
+  font-size: 12px;
+  color: var(--color-texto-claro);
+}
+
+.mensaje-texto {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-texto);
+  white-space: pre-wrap;
+}
+
+/* ===== INDICADOR DE ESCRITURA ===== */
+.typing-indicator {
+  display: inline-flex;
+  gap: 4px;
+  margin-right: 8px;
+}
+
+.typing-indicator span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-primario);
+  animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+.typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing {
+  0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ===== BOTONES ===== */
+.contenedor-botones {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.boton {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transicion);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.boton-volver {
+  background: rgba(108, 117, 125, 0.1);
+  color: var(--color-texto);
+  border: 2px solid rgba(108, 117, 125, 0.2);
+}
+
+.boton-volver:hover {
+  background: rgba(108, 117, 125, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ===== PIE DE PÁGINA ===== */
+.pie-pagina {
+  text-align: center;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.pie-pagina p {
+  color: #718096;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .contenedor-principal {
+    max-width: 100%;
+    margin: 10px;
+    padding: 20px;
+  }
+
+  .chat-container {
+    padding: 15px;
+  }
+
+  .mensajes {
+    max-height: 300px;
+  }
+
+  .mensaje-texto {
+    font-size: 13px;
+  }
+}
+/* ===== TIPOGRAFÍA Y COLORES MODIFICADOS ===== */
+body {
+  font-family: 'Inter', 'Roboto', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  color: #333333; /* Gris oscuro general para mejor legibilidad */
+}
+
+.texto-logo h1 {
+  color: #0D3B1C; /* Verde más oscuro y sofisticado */
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-weight: 800; /* Extra bold para impacto */
+  letter-spacing: -0.5px;
+  text-shadow: none; /* Más limpio sin sombra */
+}
+
+.texto-logo p {
+  color: #1B5E20; /* Verde principal */
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  font-size: 0.95rem;
+}
+
+.encabezado h2 {
+  color: #0D3B1C; /* Verde oscuro y profesional */
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.instruccion {
+  color: #5A6C7D; /* Gris azulado suave y neutral */
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.mensaje-autor {
+  color: #0D3B1C; /* Verde oscuro consistente */
+  font-weight: 700;
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+.mensaje-autor::before {
+  background: #2E7D32; /* Verde principal */
+}
+
+.mensaje.usuario .mensaje-autor::before {
+  background: #0D3B1C; /* Verde oscuro */
+}
+
+.mensaje-tiempo {
+  color: #8A9BA8; /* Gris azulado claro */
+  font-weight: 500;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: 0.85rem;
+}
+
+.mensaje-texto {
+  color: #2C3E50; /* Gris azulado oscuro - alto contraste */
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.mensaje.ia .mensaje-texto {
+  color: #2C3E50;
+  font-weight: 400;
+}
+
+.boton {
+  font-weight: 600; /* Semi-bold para un balance moderno */
+  font-family: 'Inter', 'Roboto', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.boton-volver {
+  color: #0D3B1C; /* Verde oscuro */
+}
+
+.pie-pagina p {
+  color: #8A9BA8; /* Gris azulado claro */
+  font-weight: 500;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: 0.9rem;
+}
+
+/* Indicador de escritura */
+.typing-indicator span {
+  background: linear-gradient(135deg, #2E7D32, #0D3B1C); /* Verde principal a oscuro */
+}
+
+/* Scrollbar */
+.mensajes::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #4CAF50, #2E7D32); /* Verde claro a principal */
+}
+
+.mensajes::-webkit-scrollbar-thumb:hover {
+  background: #0D3B1C; /* Verde oscuro */
+}
+
+/* Barra decorativa */
+.pie-pagina::before {
+  background: linear-gradient(to right, #4CAF50, #2E7D32); /* Verde claro a principal */
+}
+
+/* Responsive - solo tipografía y colores */
+@media (max-width: 480px) {
+  .texto-logo h1 {
+    font-weight: 800;
+    font-size: 1.8rem;
+  }
+  
+  .encabezado h2 {
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+  
+  .instruccion {
+    font-weight: 400;
+    color: #5A6C7D;
+    font-size: 0.9rem;
+  }
+  
+  .mensaje-texto {
+    color: #2C3E50;
+    font-weight: 400;
+    font-size: 0.95rem;
+  }
+  
+  .boton {
+    font-weight: 600;
+  }
+  
+  .pie-pagina p {
+    font-weight: 500;
+    color: #8A9BA8;
+    font-size: 0.85rem;
+  }
+}

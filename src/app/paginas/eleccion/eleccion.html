@@ -1,0 +1,73 @@
+<div class="pantalla-eleccion">
+    <!-- Fondo con overlay para mejor legibilidad -->
+    <div class="fondo-contenedor">
+        <div class="fondo-imagen"></div>
+        <div class="fondo-overlay"></div>
+    </div>
+
+    <div class="contenedor-principal">
+        <!-- Encabezado -->
+        <div class="encabezado">
+            <div class="logo-container">
+                <div class="logo-icon"></div>
+                <div class="texto-logo">
+                    <h1 class="app-title">Raíz y Futuro</h1>
+                    <p class="app-subtitle">Decidir bien hoy, vivir mejor mañana</p>
+                </div>
+            </div>
+            <h2>¿Qué tipo de actividad quieres hacer?</h2>
+            <p class="instruccion">Elige la opción que más se parezca a lo que tienes en mente</p>
+        </div>
+
+        <!-- Opciones -->
+        <div class="contenedor-opciones">
+            <div class="opcion-tarjeta" *ngFor="let opcion of opciones"
+                [class.seleccionada]="opcionSeleccionada === opcion.id" (click)="seleccionarOpcion(opcion.id)">
+
+                <!-- Contenedor de imagen -->
+                <div class="contenedor-imagen">
+                    <div class="imagen-opcion" [style.backgroundImage]="'url(' + opcion.imagen + ')'"></div>
+                    <div class="gradiente-imagen"></div>
+                </div>
+
+                <!-- Contenido -->
+                <div class="contenido-opcion">
+                    <div class="cabecera-opcion">
+                        <span class="emoji-icon"></span>
+                        <h3>{{opcion.titulo}}</h3>
+                    </div>
+                    <p class="descripcion">{{opcion.descripcion}}</p>
+                </div>
+
+                <!-- Check selección -->
+                <div class="check-seleccion" *ngIf="opcionSeleccionada === opcion.id">
+                    <div class="circulo-check">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M20 6L9 17L4 12" stroke="white" stroke-width="3" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <!-- En eleccion.html, asegurar que el botón siempre esté presente -->
+        <div class="contenedor-botones">
+            <button class="boton boton-volver" (click)="volver()">
+                <span class="icono">←</span>
+                Volver
+            </button>
+
+            <button class="boton boton-continuar" [class.deshabilitado]="!opcionSeleccionada" (click)="continuar()">
+                <span>Continuar</span>
+                <span class="icono">→</span>
+            </button>
+        </div>
+
+        <!-- Pie de página -->
+        <div class="pie-pagina">
+            <p>Una herramienta para pensar mejor antes de invertir</p>
+        </div>
+    </div>
+</div>

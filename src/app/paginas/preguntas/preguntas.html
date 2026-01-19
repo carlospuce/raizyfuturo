@@ -1,0 +1,175 @@
+<div class="pantalla-preguntas">
+    <!-- Fondo con overlay -->
+    <div class="fondo-contenedor">
+        <div class="fondo-imagen"></div>
+        <div class="fondo-overlay"></div>
+    </div>
+
+    <div class="contenedor-principal">
+        <!-- Encabezado -->
+        <div class="encabezado">
+            <div class="logo-container">
+                <div class="logo-icon"></div>
+                <div class="texto-logo">
+                    <h1 class="app-title">Raíz y Futuro</h1>
+                    <p class="app-subtitle">Decidir bien hoy, vivir mejor mañana</p>
+                </div>
+            </div>
+
+            <!-- Barra de progreso -->
+            <div class="barra-progreso">
+                <div class="progreso-texto">
+                    Pregunta {{preguntaActual + 1}} de {{preguntas.length}}
+                </div>
+                <div class="progreso-contenedor">
+                    <div class="progreso-barra" [style.width.%]="((preguntaActual + 1) / preguntas.length) * 100"></div>
+                </div>
+            </div>
+
+            <h2>{{preguntas[preguntaActual].titulo}}</h2>
+            <p class="instruccion">{{preguntas[preguntaActual].descripcion}}</p>
+        </div>
+
+        <!-- Contenedor de preguntas (mostrar solo la actual) -->
+        <div class="contenedor-preguntas">
+            <div class="pregunta-item">
+                <!-- Pregunta 1: Dinero inicial -->
+                <div *ngIf="preguntaActual === 0" class="pregunta-actual">
+                    <div class="input-contenedor">
+                        <label for="dineroInicial">
+                            <span class="emoji-input">💰</span> Dinero en dólares
+                        </label>
+                        <div class="input-wrapper">
+                            <span class="simbolo-dinero">$</span>
+                            <input type="number" id="dineroInicial" [(ngModel)]="respuestas.dineroInicial"
+                                placeholder="Ejemplo: 500" min="0" step="10" class="input-numerico">
+                        </div>
+                        <p class="ayuda-input">Este es el dinero que usarás para empezar todo</p>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2: Meses de trabajo -->
+                <div *ngIf="preguntaActual === 1" class="pregunta-actual">
+                    <div class="input-contenedor">
+                        <label for="mesesTrabajo">
+                            <span class="emoji-input">📅</span> Número de meses
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" id="mesesTrabajo" [(ngModel)]="respuestas.mesesTrabajo"
+                                placeholder="Ejemplo: 12" min="1" max="60" class="input-numerico">
+                            <span class="unidad-input">meses</span>
+                        </div>
+                        <p class="ayuda-input">¿Cuántos meses piensas trabajar en este emprendimiento?</p>
+                    </div>
+                </div>
+
+                <!-- Pregunta 3: Gastos mensuales -->
+                <div *ngIf="preguntaActual === 2" class="pregunta-actual">
+                    <div class="input-contenedor">
+                        <label for="gastosMensuales">
+                            <span class="emoji-input">📉</span> Gastos cada mes
+                        </label>
+                        <div class="input-wrapper">
+                            <span class="simbolo-dinero">$</span>
+                            <input type="number" id="gastosMensuales" [(ngModel)]="respuestas.gastosMensuales"
+                                placeholder="Ejemplo: 100" min="0" step="10" class="input-numerico">
+                            <span class="unidad-input">/ mes</span>
+                        </div>
+                        <p class="ayuda-input">Dinero que necesitarás gastar cada mes (materiales, transporte, etc.)</p>
+                    </div>
+                </div>
+
+                <!-- Pregunta 4: Ingresos esperados -->
+                <div *ngIf="preguntaActual === 3" class="pregunta-actual">
+                    <div class="input-contenedor">
+                        <label for="ingresosMensuales">
+                            <span class="emoji-input">📈</span> Ganancia esperada
+                        </label>
+                        <div class="input-wrapper">
+                            <span class="simbolo-dinero">$</span>
+                            <input type="number" id="ingresosMensuales" [(ngModel)]="respuestas.ingresosMensuales"
+                                placeholder="Ejemplo: 200" min="0" step="10" class="input-numerico">
+                            <span class="unidad-input">/ mes</span>
+                        </div>
+                        <p class="ayuda-input">¿Cuánto dinero esperas ganar cada mes?</p>
+                    </div>
+                </div>
+
+                <!-- Pregunta 5: Meses sin ingreso -->
+                <div *ngIf="preguntaActual === 4" class="pregunta-actual">
+                    <div class="input-contenedor">
+                        <label for="mesesSinIngreso">
+                            <span class="emoji-input">⏸️</span> Meses sin ganancia
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" id="mesesSinIngreso" [(ngModel)]="respuestas.mesesSinIngreso"
+                                placeholder="Ejemplo: 2" min="0" [max]="respuestas.mesesTrabajo" class="input-numerico">
+                            <span class="unidad-input">meses</span>
+                        </div>
+                        <p class="ayuda-input">¿Habrá meses donde no recibirás dinero? (ejemplo: inicio, temporada baja)
+                        </p>
+                        <div class="opcion-rapida" *ngIf="respuestas.mesesTrabajo > 0">
+                            <p class="sugerencia">Sugerencia: Normalmente los primeros
+                                <button type="button" class="boton-sugerencia" (click)="establecerMesesInicio()">
+                                    1-3 meses
+                                </button>
+                                son sin ganancias
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mensaje de validación -->
+            <div class="mensaje-error" *ngIf="mensajeError">
+                ⚠️ {{mensajeError}}
+            </div>
+
+            <!-- Resumen rápido (solo en última pregunta) -->
+            <div class="resumen-rapido" *ngIf="preguntaActual === 4 && validarRespuestas()">
+                <h4>📋 Resumen de tu proyecto:</h4>
+                <div class="resumen-item">
+                    <span>Inversión inicial:</span>
+                    <strong>${{respuestas.dineroInicial || 0}}</strong>
+                </div>
+                <div class="resumen-item">
+                    <span>Duración:</span>
+                    <strong>{{respuestas.mesesTrabajo || 0}} meses</strong>
+                </div>
+                <div class="resumen-item">
+                    <span>Ganancia mensual esperada:</span>
+                    <strong>${{respuestas.ingresosMensuales || 0}}</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones de navegación -->
+        <div class="contenedor-botones">
+            <!-- Botón anterior - NUNCA deshabilitado -->
+            <button class="boton boton-volver" (click)="preguntaAnterior()">
+                <span class="icono">←</span>
+                Anterior
+            </button>
+
+            <!-- Botón siguiente/finalizar -->
+            <button class="boton boton-continuar" (click)="siguientePregunta()"
+                [class.deshabilitado]="!respuestaValida()">
+                <span>{{preguntaActual === preguntas.length - 1 ? 'Evaluar' : 'Siguiente'}}</span>
+                <span class="icono">{{preguntaActual === preguntas.length - 1 ? '📊' : '→'}}</span>
+            </button>
+        </div>
+
+        <!-- Indicadores de preguntas -->
+        <div class="indicadores-preguntas">
+            <div class="indicador" *ngFor="let pregunta of preguntas; let i = index"
+                [class.activa]="i === preguntaActual" [class.completada]="i < preguntaActual" (click)="irAPregunta(i)">
+                {{i + 1}}
+            </div>
+        </div>
+
+        <!-- Pie de página -->
+        <div class="pie-pagina">
+            <p>Una herramienta para pensar mejor antes de invertir</p>
+        </div>
+    </div>
+</div>

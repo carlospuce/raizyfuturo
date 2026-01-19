@@ -1,0 +1,465 @@
+<div class="pagina-principal">
+  <!-- Fondo con overlay para mejor legibilidad -->
+  <div class="fondo-contenedor">
+    <div class="fondo-imagen"></div>
+    <div class="fondo-overlay"></div>
+  </div>
+
+  <!-- Contenido principal -->
+  <main class="contenido-principal">
+    <!-- Header con navegación mejorada -->
+    <header class="app-header">
+      <div class="header-content">
+        <div class="logo-container">
+          <img src="/logo.png" alt="Logo Raíz y Futuro" class="logo-imagen">
+          <div class="logo-text">
+            <h1 class="app-title">Ráiz y Futuro</h1>
+            <p class="app-subtitle">COMUNIDAD WAORANI</p>
+          </div>
+        </div>
+        <!-- Menú de navegación para desktop -->
+        <nav class="nav-desktop">
+          <ul class="nav-lista">
+            <li class="nav-item"><a (click)="scrollTo('descripcion')">Descripción</a></li>
+            <li class="nav-item"><a (click)="scrollTo('funcionamiento')">Cómo Funciona</a></li>
+            <li class="nav-item"><a (click)="scrollTo('faq')">Preguntas Frecuentes</a></li>
+            <!-- Nuevo botón "Empezar Ya" - MÁS GRANDE Y LLAMATIVO -->
+            <li class="nav-item">
+              <button class="btn-empezar-nav" (click)="empezar()">
+                <span class="btn-empezar-texto">EMPEZAR YA</span>
+                <span class="btn-empezar-icono">🚀</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Menú hamburguesa para móvil -->
+        <div class="hamburger" [class.active]="menuAbierto" (click)="toggleMenu()">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </div>
+
+      <!-- Menú móvil desplegable -->
+      <nav class="nav-mobile" [class.active]="menuAbierto">
+        <ul class="nav-lista-mobile">
+          <li class="nav-item-mobile"><a (click)="scrollTo('descripcion'); toggleMenu()">Descripción</a></li>
+          <li class="nav-item-mobile"><a (click)="scrollTo('funcionamiento'); toggleMenu()">Cómo Funciona</a></li>
+          <li class="nav-item-mobile"><a (click)="scrollTo('faq'); toggleMenu()">Preguntas Frecuentes</a></li>
+          <li class="nav-item-mobile"><a (click)="scrollTo('recuerda'); toggleMenu()">Recuerda</a></li>
+          <li class="nav-item-mobile"><button class="btn-mobile-empezar" (click)="empezar(); toggleMenu()">Comenzar
+              Guía</button></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Contenido central -->
+    <div class="contenedor-central">
+      <!-- Tarjeta principal -->
+      <div class="tarjeta-bienvenida">
+        <!-- Eslogan destacado -->
+        <div class="eslogan-destacado">
+          <div class="comillas">"</div>
+          <h2 class="eslogan-texto">Decidir bien hoy, vivir mejor mañana</h2>
+          <div class="comillas">"</div>
+        </div>
+
+        <!-- Sección: Descripción -->
+        <section id="descripcion" class="seccion-descripcion">
+          <div class="seccion-header">
+            <h3 class="seccion-titulo">
+              <span class="seccion-icono">📋</span>
+              Descripción de la Aplicación
+            </h3>
+          </div>
+
+          <div class="descripcion-contenido">
+            <p class="descripcion-texto">
+              <strong>Raíz y Futuro</strong> es una herramienta digital creada especialmente para
+              la comunidad Waorani, diseñada para apoyar a emprendedores y personas que desean
+              invertir su dinero de manera inteligente.
+            </p>
+
+            <div class="descripcion-puntos">
+              <div class="punto-descripcion">
+                <span class="punto-icono">🎯</span>
+                <div>
+                  <h4>Propósito Principal</h4>
+                  <p>Ayudarte a evaluar tus ideas de negocio antes de invertir recursos valiosos.</p>
+                </div>
+              </div>
+
+              <div class="punto-descripcion">
+                <span class="punto-icono">🤝</span>
+                <div>
+                  <h4>Para la Comunidad</h4>
+                  <p>Creada pensando en las necesidades específicas de emprendedores Waorani.</p>
+                </div>
+              </div>
+
+              <div class="punto-descripcion">
+                <span class="punto-icono">🛡️</span>
+                <div>
+                  <h4>Totalmente Segura</h4>
+                  <p>No requiere registro, no guarda datos personales, es 100% privada.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Sección: Cómo Funciona -->
+        <section id="funcionamiento" class="seccion-funcionamiento">
+          <div class="seccion-header">
+            <h3 class="seccion-titulo">
+              <span class="seccion-icono">⚙️</span>
+              ¿Cómo Funciona Nuestra Guía?
+            </h3>
+          </div>
+
+          <div class="funcionamiento-pasos">
+            <div class="paso-item">
+              <div class="paso-numero">01</div>
+              <div class="paso-contenido">
+                <h4>Selecciona tu Tipo de Emprendimiento</h4>
+                <p>Elige entre actividades adaptadas a nuestra comunidad:</p>
+                <div class="opciones-emprendimiento">
+                  <span class="opcion">🌱 Recolección de Frutos silvestres</span>
+                  <span class="opcion">🎨 Artesanías Locales</span>
+                  <span class="opcion">🏞️ Bioturismo Comunitario</span>
+                  <span class="opcion">🏫 Colaboración Academica</span>
+                  <span class="opcion">📦 Otros</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="paso-item">
+              <div class="paso-numero">02</div>
+              <div class="paso-contenido">
+                <h4>Responde Preguntas Sencillas</h4>
+                <p>Te haremos preguntas claras sobre tu proyecto, una por una:</p>
+                <ul class="lista-preguntas">
+                  <li><span class="pregunta-icono">💰</span> ¿Cuánto dinero piensas invertir?</li>
+                  <li><span class="pregunta-icono">⏱️</span> ¿En cuánto tiempo esperas recuperarlo?</li>
+                  <li><span class="pregunta-icono">📊</span> ¿Cuáles serán tus gastos mensuales?</li>
+                  <li><span class="pregunta-icono">📈</span> ¿Qué ganancias esperas obtener?</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="paso-item">
+              <div class="paso-numero">03</div>
+              <div class="paso-contenido">
+                <h4>Recibe Análisis Automático</h4>
+                <p>Nuestra herramienta analiza tus respuestas para darte una guía clara:</p>
+                <div class="analisis-puntos">
+                  <div class="punto-analisis">
+                    <div class="analisis-icono">📊</div>
+                    <div>
+                      <strong>Evaluamos</strong> si recuperarás tu inversión
+                    </div>
+                  </div>
+                  <div class="punto-analisis">
+                    <div class="analisis-icono">⚠️</div>
+                    <div>
+                      <strong>Identificamos</strong> posibles riesgos
+                    </div>
+                  </div>
+                  <div class="punto-analisis">
+                    <div class="analisis-icono">🎯</div>
+                    <div>
+                      <strong>Calculamos</strong> tiempos realistas
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="paso-item">
+              <div class="paso-numero">04</div>
+              <div class="paso-contenido">
+                <h4>Obtén Resultados y Recomendaciones</h4>
+                <p>Recibirás un reporte fácil de entender con consejos prácticos:</p>
+                <div class="resultados-contenedor">
+                  <div class="resultado-item resultado-bueno">
+                    <div class="resultado-icono">✅</div>
+                    <div>
+                      <strong>Inversión Conveniente:</strong><br>
+                      Tu idea parece tener buen potencial
+                    </div>
+                  </div>
+                  <div class="resultado-item resultado-riesgoso">
+                    <div class="resultado-icono">⚠️</div>
+                    <div>
+                      <strong>Inversión Riesgosa:</strong><br>
+                      Podría funcionar con algunos ajustes
+                    </div>
+                  </div>
+                  <div class="resultado-item resultado-no-recomendado">
+                    <div class="resultado-icono">❌</div>
+                    <div>
+                      <strong>No Recomendable:</strong><br>
+                      Te sugerimos reconsiderar o modificar
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Sección: Preguntas Frecuentes -->
+        <section id="faq" class="seccion-faq">
+          <div class="seccion-header">
+            <h3 class="seccion-titulo">
+              <span class="seccion-icono">❓</span>
+              Preguntas Frecuentes
+            </h3>
+            <p class="seccion-subtitulo">Respuestas a las dudas más comunes</p>
+          </div>
+
+          <div class="faq-contenedor">
+            <!-- Pregunta 1 -->
+            <div class="faq-item" [class.active]="faqAbierto === 1" (click)="toggleFaq(1)">
+              <div class="faq-pregunta">
+                <span class="faq-numero">01</span>
+                <span class="faq-texto">¿Necesito saber de computadoras para usar esta aplicación?</span>
+                <span class="faq-icono">{{faqAbierto === 1 ? '−' : '+'}}</span>
+              </div>
+              <div class="faq-respuesta" *ngIf="faqAbierto === 1">
+                <p><strong>¡No!</strong> La aplicación está diseñada para ser muy fácil de usar. Con botones grandes,
+                  textos simples y navegación clara, cualquier persona puede usarla, incluso si tiene poca experiencia
+                  con tecnología.</p>
+                <div class="faq-details">
+                  <div class="faq-detail-item">
+                    <span class="detail-icono">👆</span>
+                    <span>Botones grandes y fáciles de tocar</span>
+                  </div>
+                  <div class="faq-detail-item">
+                    <span class="detail-icono">📱</span>
+                    <span>Optimizada para celulares</span>
+                  </div>
+                  <div class="faq-detail-item">
+                    <span class="detail-icono">🔤</span>
+                    <span>Lenguaje simple y claro</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div class="faq-item" [class.active]="faqAbierto === 2" (click)="toggleFaq(2)">
+              <div class="faq-pregunta">
+                <span class="faq-numero">02</span>
+                <span class="faq-texto">¿La aplicación guarda mis datos personales?</span>
+                <span class="faq-icono">{{faqAbierto === 2 ? '−' : '+'}}</span>
+              </div>
+              <div class="faq-respuesta" *ngIf="faqAbierto === 2">
+                <p><strong>¡No guardamos ninguna información tuya!</strong> La aplicación funciona completamente en tu
+                  dispositivo.</p>
+                <ul class="faq-lista">
+                  <li>✅ <strong>Sin registro:</strong> No necesitas crear una cuenta</li>
+                  <li>✅ <strong>Sin contraseñas:</strong> No pedimos datos personales</li>
+                  <li>✅ <strong>100% privado:</strong> Cuando cierres la aplicación, toda la información desaparece</li>
+                  <li>✅ <strong>Sin internet:</strong> Funciona completamente sin conexión</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="faq-item" [class.active]="faqAbierto === 3" (click)="toggleFaq(3)">
+              <div class="faq-pregunta">
+                <span class="faq-numero">03</span>
+                <span class="faq-texto">¿Es gratis usar la aplicación?</span>
+                <span class="faq-icono">{{faqAbierto === 3 ? '−' : '+'}}</span>
+              </div>
+              <div class="faq-respuesta" *ngIf="faqAbierto === 3">
+                <p><strong>Sí, es completamente gratis.</strong> "Raíz y Futuro" es un proyecto creado para apoyar a la
+                  comunidad Waorani.</p>
+                <div class="faq-acento">
+                  <div class="acento-icono">💚</div>
+                  <div class="acento-texto">
+                    <strong>Sin costos ocultos:</strong> No hay pagos, ni suscripciones, ni compras dentro de la app.
+                  </div>
+                </div>
+                <div class="faq-acento">
+                  <div class="acento-icono">🎁</div>
+                  <div class="acento-texto">
+                    <strong>Proyecto comunitario:</strong> Creado con el propósito de ayudar, no de generar ganancias.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pregunta 4 -->
+            <div class="faq-item" [class.active]="faqAbierto === 4" (click)="toggleFaq(4)">
+              <div class="faq-pregunta">
+                <span class="faq-numero">04</span>
+                <span class="faq-texto">¿Puedo usar la aplicación varias veces?</span>
+                <span class="faq-icono">{{faqAbierto === 4 ? '−' : '+'}}</span>
+              </div>
+              <div class="faq-respuesta" *ngIf="faqAbierto === 4">
+                <p><strong>¡Claro que sí!</strong> Puedes usar la aplicación tantas veces como quieras.</p>
+                <div class="faq-uso-casos">
+                  <h4>Ejemplos de cuándo usarla:</h4>
+                  <div class="caso-item">
+                    <span class="caso-icono">💡</span>
+                    <span>Cada vez que tengas una nueva idea de negocio</span>
+                  </div>
+                  <div class="caso-item">
+                    <span class="caso-icono">📊</span>
+                    <span>Para revisar y mejorar un emprendimiento existente</span>
+                  </div>
+                  <div class="caso-item">
+                    <span class="caso-icono">👥</span>
+                    <span>Para ayudar a familiares o amigos con sus ideas</span>
+                  </div>
+                  <div class="caso-item">
+                    <span class="caso-icono">🔄</span>
+                    <span>Para probar diferentes escenarios y ver cuál funciona mejor</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pregunta 5 -->
+            <div class="faq-item" [class.active]="faqAbierto === 5" (click)="toggleFaq(5)">
+              <div class="faq-pregunta">
+                <span class="faq-numero">05</span>
+                <span class="faq-texto">¿Los resultados son obligatorios?</span>
+                <span class="faq-icono">{{faqAbierto === 5 ? '−' : '+'}}</span>
+              </div>
+              <div class="faq-respuesta" *ngIf="faqAbierto === 5">
+                <p><strong>No, son solo recomendaciones.</strong> La aplicación es una guía para ayudarte a pensar
+                  mejor.</p>
+                <div class="faq-importante">
+                  <div class="importante-icono">👑</div>
+                  <div class="importante-contenido">
+                    <h4>Tu sabiduría es lo más importante:</h4>
+                    <ul>
+                      <li>Tu experiencia en la comunidad</li>
+                      <li>Tu conocimiento del territorio</li>
+                      <li>Tu conexión con la cultura Waorani</li>
+                      <li>Tus relaciones familiares y comunitarias</li>
+                    </ul>
+                    <p class="faq-conclusion">La decisión final siempre es tuya. Usa la app como una herramienta más, no
+                      como una verdad absoluta.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pregunta 6 -->
+            <div class="faq-item" [class.active]="faqAbierto === 6" (click)="toggleFaq(6)">
+              <div class="faq-pregunta">
+                <span class="faq-numero">06</span>
+                <span class="faq-texto">¿Qué hago si no entiendo algo?</span>
+                <span class="faq-icono">{{faqAbierto === 6 ? '−' : '+'}}</span>
+              </div>
+              <div class="faq-respuesta" *ngIf="faqAbierto === 6">
+                <p><strong>¡No te preocupes!</strong> La aplicación está diseñada para ser clara, pero si tienes dudas:
+                </p>
+                <div class="faq-ayuda">
+                  <div class="ayuda-item">
+                    <div class="ayuda-icono">👵👴</div>
+                    <div class="ayuda-texto">
+                      <strong>Pide ayuda a personas de confianza:</strong>
+                      <p>Familiares, amigos o líderes comunitarios que tengan más experiencia.</p>
+                    </div>
+                  </div>
+                  <div class="ayuda-item">
+                    <div class="ayuda-icono">🔄</div>
+                    <div class="ayuda-texto">
+                      <strong>Puedes volver atrás:</strong>
+                      <p>La aplicación te permite revisar y cambiar tus respuestas.</p>
+                    </div>
+                  </div>
+                  <div class="ayuda-item">
+                    <div class="ayuda-icono">💭</div>
+                    <div class="ayuda-texto">
+                      <strong>Tómate tu tiempo:</strong>
+                      <p>No hay prisa. Piensa bien cada respuesta antes de continuar.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-footer">
+            <p class="faq-footer-texto">
+              <span class="footer-icono">💬</span>
+              <strong>¿Tienes otra pregunta?</strong> Habla con miembros de tu comunidad o personas de confianza que
+              puedan orientarte mejor.
+            </p>
+          </div>
+        </section>
+
+        <!-- Llamada a la acción -->
+        <div class="cta-container">
+          <button class="btn-comenzar" (click)="empezar()">
+            <span class="btn-text">Comenzar la guía ahora</span>
+            <span class="btn-icono">→</span>
+          </button>
+        </div>
+
+        <!-- Información importante -->
+        <div class="informacion-importante">
+          <div class="info-icono">💡</div>
+          <div class="info-contenido">
+            <p><strong>Recuerda:</strong> Esta página no es una clase sobre dinero, es una guía para pensar mejor antes
+              de decidir cómo usar los recursos. Las decisiones que tomamos pueden ayudar o afectar al bienestar de la
+              familia y de la comunidad, especialmente cuando el dinero se gasta sin pensar, en vicios como el alcohol o
+              en cosas que no dejan beneficio.</p>
+          </div>
+        </div>
+      </div>
+      <footer class="app-footer-final">
+        <div class="footer-contenido-final">
+
+          <!-- Primera fila: Colaboración -->
+          <div class="footer-fila-colaboracion">
+            <div class="footer-colaboracion">
+              <h4 class="colaboracion-titulo">En colaboración con</h4>
+              <div class="colaboracion-instituciones">
+                <div class="institucion-item">
+                  <img src="/logo-puce.png" alt="Logo PUCE" class="institucion-logo">
+                  <div class="institucion-info">
+                    <p class="institucion-nombre">Pontificia Universidad Católica del Ecuador</p>
+                    <p class="institucion-departamento">Dirección de Vinculación</p>
+                  </div>
+                </div>
+                <div class="institucion-item">
+                  <div class="parque-info">
+                    <p class="parque-nombre">Parque Nacional Yasuní</p>
+                    <p class="parque-ubicacion">Comunidad Waorani, Amazonía Ecuatoriana</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="footer-desarrolladores">
+              <h4 class="desarrolladores-titulo">Desarrollado por</h4>
+              <div class="desarrolladores-nombres">
+                <span class="desarrollador">Carlos Saavedra</span>
+                <span class="separador">•</span>
+                <span class="desarrollador">Danny Balseca</span>
+              </div>
+            </div>
+          </div>
+          <!-- Segunda fila: Uso y derechos -->
+          <div class="footer-fila-derechos">
+            <div class="footer-uso-derechos">
+              <p class="uso-texto-final">
+                Para uso educativo y comunitario exclusivamente. Prohibida su reproducción con fines comerciales.
+              </p>
+              <p class="derechos-final">
+                © 2026 <strong>Ráiz y Futuro</strong> - Todos los derechos reservados
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </footer>
+    </div>
+  </main>
+</div>
